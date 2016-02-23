@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.derekzy.datingbox.R;
@@ -21,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by derekzy on 2016/2/18.
+ * Created by derekzy on 2016/2/23.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder>{
+public class FavRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public Context context;
     public List<CardItem> list;
     private List<String> numList;
@@ -43,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder>{
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public RecyclerAdapter(Context context, List list) {
+    public FavRecyclerAdapter(Context context, List list) {
         this.list = list;
         this.context = context;
         numList = new ArrayList<>();
@@ -64,24 +61,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder>{
     @Override
     public void onBindViewHolder(final MyViewHolder holder,  final int position) {
 
+//        boolean status;
+
         editor = pref.edit();
 //        editor.putBoolean(String.valueOf(list.get(position).getId()),list.get(position).getFav()); //为了收藏新添加的加的逻辑
+//        status = pref.getBoolean(String.valueOf(list.get(position).getId()), false);
         holder.numText.setText(numList.get(position));
-        LogUtil.e("afterSave position",""+position);
+        LogUtil.e("afterSave position", "" + position);
         holder.textView.setText(list.get(position).getContent());
         holder.checkBox.setChecked(list.get(position).getFav());
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean alterStatus = pref.getBoolean(String.valueOf(list.get(position).getId()), false);
-                LogUtil.e("*********", "current key is " + list.get(position) + "value is " + alterStatus);
+                boolean alterStatus = pref.getBoolean(String.valueOf(list.get(position).getId()), true); //Fav a little bit different
+                LogUtil.e("*********", "current id is " + list.get(position).getId() + "value is " + alterStatus);
                 if (alterStatus) {
                     holder.checkBox.setChecked(false);
                     editor.putBoolean(String.valueOf(list.get(position).getId()), false);
                     editor.apply(); //apply没有返回值而commit返回boolean表明修改是否提交成功。apply异步提交到硬盘，后者可以覆盖；
                     // commit同步到磁盘，多个commit并发时要等待，降低了效率
                     Toast.makeText(context, "取消收藏", Toast.LENGTH_SHORT).show();
+
+//                    notifyItemRemoved(position);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {

@@ -4,21 +4,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.derekzy.datingbox.R;
 import com.derekzy.datingbox.Utils.LogUtil;
-import com.derekzy.datingbox.adapter.ListViewAdapter;
 import com.derekzy.datingbox.adapter.RecyclerAdapter;
 import com.derekzy.datingbox.db.MyDatabase;
 import com.derekzy.datingbox.modle.CardItem;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

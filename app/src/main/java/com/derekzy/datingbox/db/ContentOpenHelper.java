@@ -22,7 +22,7 @@ public class ContentOpenHelper extends SQLiteOpenHelper {
                 "如果祝福都不能给，我希望能给你舒服", "fun evil", "4", "false"});
         for (int i =0; i< 20; i++) {
             db.execSQL("insert into article (content, tag, level, fav) values(?, ?, ?, ?)", new String[]{"虽然不能给你幸福，但是我可以给你祝福\n" +
-                    "如果祝福都不能给，我希望能给你舒服 test3", "fun evil", "2", "true"});
+                    "如果祝福都不能给，我希望能给你舒服 test3", "fun evil", "2", "false"});
         }
 
         db.execSQL("insert into article (content, tag, level, fav) values(?, ?, ?, ?)", new String[]{"虽然不能给你幸福，但是我可以给你祝福\n" +

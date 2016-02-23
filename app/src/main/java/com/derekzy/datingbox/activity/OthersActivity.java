@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,11 +18,11 @@ import android.widget.TextView;
 
 import com.derekzy.datingbox.R;
 import com.derekzy.datingbox.Utils.LogUtil;
+import com.derekzy.datingbox.adapter.FavRecyclerAdapter;
 import com.derekzy.datingbox.adapter.RecyclerAdapter;
 import com.derekzy.datingbox.db.MyDatabase;
 import com.derekzy.datingbox.modle.CardItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -107,6 +105,7 @@ public class OthersActivity extends AppCompatActivity {
 
         if (flag == FAV) {
             toolbar.inflateMenu(R.menu.fav_toolbar);
+
         } else {
             toolbar.inflateMenu(R.menu.others_toolbar);
         }
@@ -118,7 +117,8 @@ public class OthersActivity extends AppCompatActivity {
                         break;
                     case R.id.id_create:
                         Intent intent = new Intent(OthersActivity.this, EditActivity.class);
-                        startActivityForResult(intent, 1);
+                        startActivity(intent);
+                        finish();
                         break;
                     case R.id.id_exit:
                         finish();
@@ -139,10 +139,16 @@ public class OthersActivity extends AppCompatActivity {
                 tabName.setText(R.string.MyFavorite);
         }
 
-        recyclerAdapter = new RecyclerAdapter(this, cardItemList);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(recyclerAdapter);
+
+        if (flag == FAV) {
+           FavRecyclerAdapter favRecyclerAdapter = new FavRecyclerAdapter(this, cardItemList);
+            recyclerView.setAdapter(favRecyclerAdapter);
+        }else {
+
+            recyclerAdapter = new RecyclerAdapter(this, cardItemList);
+            recyclerView.setAdapter(recyclerAdapter);
+        }
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

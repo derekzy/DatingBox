@@ -21,6 +21,13 @@ public class EditActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private EditText editText;
     private MyDatabase myDatabase;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        backToOthersActivity();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +43,7 @@ public class EditActivity extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                backToOthersActivity();
             }
         });
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -52,20 +59,28 @@ public class EditActivity extends AppCompatActivity{
                             }
                         }).start();
 
-                        CardItem cardItem = new CardItem();
-                        cardItem.setId(1000);
-                        cardItem.setContent(newContent);
-                        cardItem.setFav(true);
-                        cardItem.setLevel(0);
-                        cardItem.setTag(null);
+//                        CardItem cardItem = new CardItem();
+//                        cardItem.setId(1000);
+//                        cardItem.setContent(newContent);
+//                        cardItem.setFav(true);
+//                        cardItem.setLevel(0);
+//                        cardItem.setTag(null);
 
-                        Intent intent = new Intent();
-                        intent.putExtra("newContent", cardItem);
-                        setResult(RESULT_OK, intent);
-                        finish();
+                        backToOthersActivity();
+//                        intent.putExtra("newContent", cardItem);
+//                        setResult(RESULT_OK, intent);
+                        break;
+
                 }
                 return true;
             }
         });
+    }
+
+    private void backToOthersActivity() {
+        Intent intent = new Intent(EditActivity.this, OthersActivity.class);
+        intent.putExtra("flag", OthersActivity.FAV);
+        startActivity(intent);
+        finish();
     }
 }

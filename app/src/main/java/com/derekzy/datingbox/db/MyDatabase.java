@@ -207,7 +207,8 @@ public class MyDatabase {
 
         List<CardItem> itemList = new ArrayList<>();
         LogUtil.e("***", "loadFav");
-        Cursor c = db.query("article", null, "fav like ?", new String[]{"true"}, null, null, null);
+//        Cursor c = db.query("article", null, "fav like ?", new String[]{"true"}, null, null, null);
+        Cursor c = db.rawQuery("SELECT * FROM article where fav like ? ORDER BY _id DESC", new String[]{"true"});
         if (c.moveToFirst()) {
             do {
                 CardItem cardItem = new CardItem();
@@ -217,7 +218,7 @@ public class MyDatabase {
                 cardItem.setLevel(c.getInt(c.getColumnIndex("level")));
                 cardItem.setFav(Boolean.valueOf(c.getString(c.getColumnIndex("fav"))));
                 itemList.add(cardItem);
-                LogUtil.e("*******", "loadFav content is " + c.getString(c.getColumnIndex("content")) + " tag is "
+                LogUtil.e("*******", "id is"+c.getInt(c.getColumnIndex("_id"))+"loadFav content is " + c.getString(c.getColumnIndex("content")) + " tag is "
                         + c.getString(c.getColumnIndex("tag")) + " level is " + c.getInt(c.getColumnIndex("level"))
                         + " fav is " + Boolean.valueOf(c.getString(c.getColumnIndex("fav"))));
             } while (c.moveToNext());
