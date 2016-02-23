@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.NavigationActivity"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/id_toolbar"
+        android:theme="@style/ThemeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/CustomPopupMenu"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:text="@string/DatingBox"
+            android:textColor="@color/derwhite"
+            />
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/id_flirt_button"
+        android:layout_centerInParent="true"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigation_button"
+        android:text="@string/flirt"
+        android:textSize="14sp"
+        android:textColor="@color/derwhite"/>
+
+    <Button
+        android:id="@+id/id_feeling_button"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/id_flirt_button"
+        android:layout_marginTop="6dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigation_button"
+        android:text="@string/feeling"
+        android:textSize="14sp"
+        android:textColor="@color/derwhite"/>
+
+    <Button
+        android:id="@+id/id_fav_button"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/id_feeling_button"
+        android:layout_marginTop="6dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_fav"
+        android:text="@string/MyFavorite"
+        android:textSize="14sp"
+        android:textColor="@color/derwhite"/>
+</RelativeLayout>

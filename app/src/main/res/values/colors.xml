@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="derwhite">#fff</color>
+    <color name="derorange">#e47f7f</color>
+    <color name="selectedcolor">#15237c</color>
+    <color name="normalcolor">#4559c6</color>
+    <color name="touming">#00000000</color>
+</resources>

@@ -1,0 +1,49 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="MyThemeBlue">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyThemeBlue" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#c5000000</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:colorForeground">#837c7c</item>
+        <item name="android:colorForegroundInverse">#ef0d0d</item>
+        <item name="android:colorBackground">#e4383131</item>
+        <item name="android:colorBackgroundCacheHint">#49b7f2</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeStyle">@style/Base.Widget.AppCompat.ActionMode</item>
+    </style>
+    
+    <style name="EditTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:actionBarItemBackground">@color/touming</item>
+        <item name="android:backgroundDimAmount">@color/touming</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="backgroundTint">@color/touming</item>
+        <item name="android:title">新卡片</item>
+        <item name="android:colorForeground">#837c7c</item>
+        <item name="android:colorForegroundInverse">#ef0d0d</item>
+        <item name="android:colorBackground">#e4383131</item>
+        <item name="android:colorBackgroundCacheHint">#49b7f2</item>
+    </style>
+
+    <style name="ThemeToolbar" parent="MyThemeBlue">
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">#fff</item>
+        <!-- color of the menu overflow icon -->
+        <item name="android:textColorSecondary">#fff</item>
+        <item name="android:textColorPrimary">@color/derwhite</item>
+    </style>
+
+    <style name="CustomPopupMenu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">#fff</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+</resources>

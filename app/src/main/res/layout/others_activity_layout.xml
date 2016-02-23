@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_coordinatorlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.LevelActivity"
+    >
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/id_appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--app:theme is deprecated-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/id_toolbar"
+            android:theme="@style/ThemeToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/CustomPopupMenu"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/DatingBox"
+                android:id="@+id/id_appname"
+                android:textColor="@color/derwhite"
+                />
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_tablayout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/id_tabtext"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="20dp"
+                android:textColor="@color/derorange"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:id="@+id/id_tabline"
+                android:background="@color/derwhite"
+                />
+            <!--<TextView-->
+                <!--android:id="@+id/id_tabtrangle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_gravity="center|bottom"-->
+                <!--android:layout_height="4dp"-->
+                <!--android:text="@string/TabTrangle"-->
+                <!--android:textSize="10sp"-->
+                <!--android:textColor="@color/derwhite"/>-->
+
+        </LinearLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <include layout="@layout/frag_layout"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_floatingactionbar"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_arrow_upward_white_24dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="8dp"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/colorPrimaryDark"
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>
