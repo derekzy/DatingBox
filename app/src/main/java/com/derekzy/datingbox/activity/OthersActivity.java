@@ -81,7 +81,6 @@ public class OthersActivity extends AppCompatActivity {
         appName = (TextView) findViewById(R.id.id_appname);
         tabName = (TextView) findViewById(R.id.id_tabtext);
         tabLine = (ImageView) findViewById(R.id.id_tabline);
-//        tabTrangle = (TextView) findViewById(R.id.id_tabtrangle);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.id_floatingactionbar);
         recyclerView = (RecyclerView) findViewById(R.id.id_recycleview);
 
@@ -94,7 +93,7 @@ public class OthersActivity extends AppCompatActivity {
             }
         });
         AssetManager assetManager = getAssets();
-        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/test.ttf");
+        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
         appName.setTypeface(typeface);
 
         myDatabase = MyDatabase.getInstance(this);

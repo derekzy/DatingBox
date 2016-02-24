@@ -68,8 +68,8 @@ public class FavRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 //        status = pref.getBoolean(String.valueOf(list.get(position).getId()), false);
         holder.numText.setText(numList.get(position));
         LogUtil.e("afterSave position", "" + position);
-        holder.textView.setText(list.get(position).getContent());
-        holder.checkBox.setChecked(list.get(position).getFav());
+        holder.textView.setText("\u3000\u3000"+list.get(position).getContent());
+        holder.checkBox.setChecked(pref.getBoolean(String.valueOf(list.get(position).getId()), true));
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override

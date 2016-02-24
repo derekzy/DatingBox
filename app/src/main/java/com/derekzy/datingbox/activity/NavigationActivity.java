@@ -1,6 +1,8 @@
 package com.derekzy.datingbox.activity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.derekzy.datingbox.R;
 
@@ -20,6 +23,7 @@ import java.sql.BatchUpdateException;
 public class NavigationActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private TextView appName;
     private Button feelingButton;
     private Button flirtingButton;
     private Button favButton;
@@ -30,6 +34,7 @@ public class NavigationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation);
 
         toolbar = (Toolbar) findViewById(R.id.id_toolbar);
+        appName = (TextView) findViewById(R.id.id_appname);
         toolbar.setNavigationIcon(R.drawable.ic_inbox_white_24dp);
         feelingButton = (Button) findViewById(R.id.id_feeling_button);
         flirtingButton = (Button) findViewById(R.id.id_flirt_button);
@@ -46,6 +51,11 @@ public class NavigationActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        AssetManager assetManager = getAssets();
+        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
+        appName.setTypeface(typeface);
+
         feelingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

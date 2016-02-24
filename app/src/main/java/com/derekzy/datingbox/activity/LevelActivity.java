@@ -77,7 +77,7 @@ public class LevelActivity extends AppCompatActivity {
         });
 
         AssetManager assetManager = getAssets();
-        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/test.ttf");
+        Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
         appName.setTypeface(typeface);
 //
         //初始化ViewPager适配器

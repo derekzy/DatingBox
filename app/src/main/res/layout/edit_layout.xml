@@ -18,21 +18,32 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/id_toolbar">
+        android:layout_below="@id/id_toolbar"
+        android:orientation="vertical">
         <EditText
             android:layout_width="match_parent"
             android:layout_margin="12dp"
             android:layout_height="200dp"
-            android:textColorLink="@color/colorAccent"
             android:textSize="14sp"
             android:padding="10dp"
+            android:gravity="top"
             android:id="@+id/id_edit"
             android:hint="@string/WriteSomething"
-            android:background="@drawable/navigation_button"
-            android:textColor="@color/derwhite"/>
-    </LinearLayout>
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/id_save_button"
+            android:layout_below="@+id/id_edit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="@string/Save"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:padding="6dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>

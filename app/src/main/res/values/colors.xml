@@ -9,4 +9,9 @@
     <color name="selectedcolor">#15237c</color>
     <color name="normalcolor">#4559c6</color>
     <color name="touming">#00000000</color>
+    <color name="lightgray">#def9f6f6</color>
+    <color name="pressed_lightgray">#e7edecec</color>
+    <color name="gray">#a39b9b</color>
+    <color name="pressed_gray">#565454</color>
+    <color name="black">#151414</color>
 </resources>

@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.derekzy.datingbox.R;
 import com.derekzy.datingbox.db.MyDatabase;
 import com.derekzy.datingbox.modle.CardItem;
+
+import java.io.BufferedInputStream;
 
 /**
  * Created by derekzy on 2016/2/23.
@@ -21,6 +24,7 @@ public class EditActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private EditText editText;
     private MyDatabase myDatabase;
+    private Button saveButton;
 
     @Override
     public void onBackPressed() {
@@ -36,6 +40,7 @@ public class EditActivity extends AppCompatActivity{
 
         toolbar = (Toolbar) findViewById(R.id.id_toolbar);
         editText = (EditText) findViewById(R.id.id_edit);
+        saveButton = (Button) findViewById(R.id.id_save_button);
 //        setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.edit_toolbar);
 
@@ -46,18 +51,17 @@ public class EditActivity extends AppCompatActivity{
                 backToOthersActivity();
             }
         });
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.id_save:
-                        final String newContent = editText.getText().toString();
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                myDatabase.saveNewContent(newContent);
-                            }
-                        }).start();
+            public void onClick(View v) {
+                final String newContent = editText.getText().toString();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        myDatabase.saveNewContent(newContent);
+                    }
+                }).start();
 
 //                        CardItem cardItem = new CardItem();
 //                        cardItem.setId(1000);
@@ -66,13 +70,9 @@ public class EditActivity extends AppCompatActivity{
 //                        cardItem.setLevel(0);
 //                        cardItem.setTag(null);
 
-                        backToOthersActivity();
+                backToOthersActivity();
 //                        intent.putExtra("newContent", cardItem);
 //                        setResult(RESULT_OK, intent);
-                        break;
-
-                }
-                return true;
             }
         });
     }
