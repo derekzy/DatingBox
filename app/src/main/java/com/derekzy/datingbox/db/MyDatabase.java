@@ -182,7 +182,8 @@ public class MyDatabase {
 
         List<CardItem> itemList = new ArrayList<>();
         LogUtil.e("***", "loadFlirt");
-        Cursor c = db.query("article", null, "tag like ?", new String[]{"%fun%"}, null, null, null);
+//        Cursor c = db.query("article", null, "tag like ?", new String[]{"%fun%"}, null, null, null);
+        Cursor c = db.rawQuery("SELECT * FROM article where tag like ? ORDER BY level ASC", new String[]{"fun"});
         if (c.moveToFirst()) {
             do {
                 CardItem cardItem = new CardItem();

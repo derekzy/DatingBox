@@ -1,5 +1,6 @@
 package com.derekzy.datingbox.activity;
 
+import android.app.AlertDialog;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
@@ -9,11 +10,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.derekzy.datingbox.R;
+import com.derekzy.datingbox.Utils.LogUtil;
 import com.derekzy.datingbox.adapter.ViewPagerAdapter;
 import com.derekzy.datingbox.db.MyDatabase;
 import com.derekzy.datingbox.frag.FeedFrag;
@@ -37,6 +42,16 @@ public class LevelActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private ViewPagerAdapter viewPagerAdapter;
 
+    private void startAnimation() {
+        floatingActionButton.setTranslationY(2 * getResources()
+                .getDimensionPixelOffset(R.dimen.btn_fab_size));
+
+        floatingActionButton.animate().translationY(0)
+                .setInterpolator(new OvershootInterpolator(0.f))
+                .setDuration(300)
+                .setStartDelay(300);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +64,7 @@ public class LevelActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.id_viewpager);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.id_floatingactionbar);
 
+        startAnimation();
         //Create db
         myDatabase = MyDatabase.getInstance(this);
 
@@ -67,12 +83,29 @@ public class LevelActivity extends AppCompatActivity {
         //配置View
         //set toolbar
          //不把toolbar作为actionbar来用时，可以inflateMenu，setOnMenuItemListener
-        toolbar.inflateMenu(R.menu.others_toolbar);
+        toolbar.inflateMenu(R.menu.level_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.id_question:
+                        android.support.v7.app.AlertDialog.Builder builder =
+                                new android.support.v7.app.AlertDialog.Builder(LevelActivity.this);
+                        LayoutInflater inflater = LayoutInflater.from(LevelActivity.this);
+                        View view = inflater.inflate(R.layout.question_layout, null);
+                        builder.setView(view);
+                        builder.setCancelable(true);
+                        android.support.v7.app.AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                }
+                return true;
             }
         });
 

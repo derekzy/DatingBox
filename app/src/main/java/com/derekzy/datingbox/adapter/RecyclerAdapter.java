@@ -68,8 +68,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder>{
 //        editor.putBoolean(String.valueOf(list.get(position).getId()),list.get(position).getFav()); //为了收藏新添加的加的逻辑
         holder.numText.setText(numList.get(position));
         LogUtil.e("afterSave position", "" + position);
-        holder.textView.setText("　　"+list.get(position).getContent());
-        holder.checkBox.setChecked(list.get(position).getFav());
+        holder.textView.setText(list.get(position).getContent());
+        holder.checkBox.setChecked(pref.getBoolean(String.valueOf(list.get(position).getId()), false));
 
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override

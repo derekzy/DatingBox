@@ -5,19 +5,27 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.derekzy.datingbox.R;
 import com.derekzy.datingbox.Utils.LogUtil;
+import com.derekzy.datingbox.Utils.Utils;
 import com.derekzy.datingbox.adapter.FavRecyclerAdapter;
 import com.derekzy.datingbox.adapter.RecyclerAdapter;
 import com.derekzy.datingbox.db.MyDatabase;
@@ -45,6 +53,15 @@ public class OthersActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
 
     private MyDatabase myDatabase;
+    private void startAnimation() {
+        floatingActionButton.setTranslationY(2 * getResources()
+                .getDimensionPixelOffset(R.dimen.btn_fab_size));
+
+        floatingActionButton.animate().translationY(0)
+                .setInterpolator(new OvershootInterpolator(0.f))
+                .setDuration(300)
+                .setStartDelay(300);
+    }
 
     public static void actionStart(Context context, int type) {
         Intent intent = new Intent(context, OthersActivity.class);
@@ -52,25 +69,26 @@ public class OthersActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    /**
-                     * 获取序列化对象,并且是adapter里面的list发生改变，这里传入的增加了也不会重新载入适配器了
-                     */
 
-                    CardItem cardItem = (CardItem) getIntent().getSerializableExtra("newContent");
-                    LogUtil.e("Before add cardItemList", "cardItemList is " +cardItemList);
-                    recyclerAdapter.list.add(0, cardItem); //插入的位置
-                    recyclerAdapter.notifyItemInserted(0);
-                    LogUtil.e("result","onActivityResult run");
-                    break;
-                }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//            case 1:
+//                if (resultCode == RESULT_OK) {
+//                    /**
+//                     * 获取序列化对象,并且是adapter里面的list发生改变，这里传入的增加了也不会重新载入适配器了
+//                     */
+//
+//                    CardItem cardItem = (CardItem) getIntent().getSerializableExtra("newContent");
+//                    LogUtil.e("Before add cardItemList", "cardItemList is " +cardItemList);
+//                    recyclerAdapter.list.add(0, cardItem); //插入的位置
+//                    recyclerAdapter.notifyItemInserted(0);
+//                    LogUtil.e("result","onActivityResult run");
+//                    break;
+//                }
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +102,8 @@ public class OthersActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton) findViewById(R.id.id_floatingactionbar);
         recyclerView = (RecyclerView) findViewById(R.id.id_recycleview);
 
+        startAnimation();
+
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -96,6 +116,7 @@ public class OthersActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
         appName.setTypeface(typeface);
 
+
         myDatabase = MyDatabase.getInstance(this);
 
         Intent intent = getIntent();
@@ -105,8 +126,6 @@ public class OthersActivity extends AppCompatActivity {
         if (flag == FAV) {
             toolbar.inflateMenu(R.menu.fav_toolbar);
 
-        } else {
-            toolbar.inflateMenu(R.menu.others_toolbar);
         }
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -119,9 +138,6 @@ public class OthersActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.id_exit:
-                        finish();
-                        break;
                 }
                 return true;
             }
@@ -132,10 +148,14 @@ public class OthersActivity extends AppCompatActivity {
             case FLIRT:
                 cardItemList = myDatabase.loadFlirt();
                 tabName.setText(R.string.Flirt);
+                setAppNameRightMargin();
+
                 break;
             case FAV:
                 cardItemList = myDatabase.loadFav();
                 tabName.setText(R.string.MyFavorite);
+
+                break;
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -158,5 +178,13 @@ public class OthersActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setAppNameRightMargin() {
+
+        int distance = Utils.dpToPx(48);
+        Toolbar.LayoutParams lp = (Toolbar.LayoutParams) appName.getLayoutParams();
+        lp.rightMargin = distance;
+        appName.setLayoutParams(lp);
     }
 }

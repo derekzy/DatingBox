@@ -16,5 +16,9 @@
     <string name="Save">保存</string>
     <string name="TabTrangle">▲</string>
     <string name="WriteSomething">    写点什么...</string>
+    <string name="question1">❤:\n和MM刚认识不久</string>
+    <string name="question2">❤❤:\n和MM相处一段时间，并且对你不反感</string>
+    <string name="question3">❤❤❤:\n和MM处于暧昧关系</string>
+    <string name="question4">❤❤❤❤:\n和MM默认是情侣关系或者已经是情侣</string>
 
 </resources>

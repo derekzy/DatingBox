@@ -1,6 +1,8 @@
 package com.derekzy.datingbox.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,10 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.derekzy.datingbox.R;
+import com.derekzy.datingbox.Utils.LogUtil;
+import com.derekzy.datingbox.Utils.Utils;
 
 import java.sql.BatchUpdateException;
 
@@ -27,9 +32,41 @@ public class NavigationActivity extends AppCompatActivity {
     private Button feelingButton;
     private Button flirtingButton;
     private Button favButton;
+
+    private static final int ANIM_DURATION_TOOLBAR = 300;
+
+    private void startIntroAnimation() {
+        int actionBarsize = Utils.dpToPx(56);
+        toolbar.setTranslationY(-actionBarsize);
+        appName.setTranslationY(-actionBarsize);
+
+        toolbar.animate().translationY(0)
+                .setDuration(ANIM_DURATION_TOOLBAR)
+                .setStartDelay(300);
+        appName.animate().translationY(0)
+                .setDuration(ANIM_DURATION_TOOLBAR)
+                .setStartDelay(400);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startIntroAnimation();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            PackageManager packageManager = getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            String versionName = packageInfo.versionName;
+            int versionCode = packageInfo.versionCode;
+            String packName = packageInfo.packageName;
+            LogUtil.e("tag","versionName "+versionName+ " versionCode " +versionCode+" packageName "+packName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         setContentView(R.layout.activity_navigation);
 
@@ -55,6 +92,8 @@ public class NavigationActivity extends AppCompatActivity {
         AssetManager assetManager = getAssets();
         Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
         appName.setTypeface(typeface);
+
+        startIntroAnimation();
 
         feelingButton.setOnClickListener(new View.OnClickListener() {
             @Override

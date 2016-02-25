@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:textSize="24sp"
             android:gravity="center"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/id_appname"
             android:text="@string/DatingBox"
             android:textColor="@color/derwhite"

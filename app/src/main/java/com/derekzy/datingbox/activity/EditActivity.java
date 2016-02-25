@@ -42,7 +42,7 @@ public class EditActivity extends AppCompatActivity{
         editText = (EditText) findViewById(R.id.id_edit);
         saveButton = (Button) findViewById(R.id.id_save_button);
 //        setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.edit_toolbar);
+//        toolbar.inflateMenu(R.menu.edit_toolbar);
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

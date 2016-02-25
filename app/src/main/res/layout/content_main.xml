@@ -28,7 +28,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="15dp"
                 android:textSize="24sp"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -63,8 +62,8 @@
         />
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/btn_fab_size"
+        android:layout_height="@dimen/btn_fab_size"
         android:id="@+id/id_floatingactionbar"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_arrow_upward_black_24dp"
