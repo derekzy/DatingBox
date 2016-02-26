@@ -30,10 +30,10 @@ public class FeedFrag extends Fragment {
     private RecyclerAdapter recyclerAdapter;
 
     //声明状态常量
-    public static final int VERTICAL_LIST = 0;
-    public static final int HORIZONTAL_LIST = 1;
-    public static final int VERTICAL_GRID = 2;
-    public static final int HORIZONTAL_GRID = 3;
+    public static final int LEVEL_ONE = 0;
+    public static final int LEVEL_TWO = 1;
+    public static final int LEVEL_THREE = 2;
+    public static final int LEVEL_FOUR = 3;
 
     private int flag = 0;
 
@@ -56,16 +56,16 @@ public class FeedFrag extends Fragment {
         list = new ArrayList<>();
         myDatabase = MyDatabase.getInstance(getActivity());
         switch (flag) {
-            case VERTICAL_LIST:
+            case LEVEL_ONE:
                 list = myDatabase.loadLevel1();
                 break;
-            case HORIZONTAL_LIST:
+            case LEVEL_TWO:
                 list = myDatabase.loadLevel2();
                 break;
-            case HORIZONTAL_GRID:
+            case LEVEL_THREE:
                 list = myDatabase.loadLevel3();
                 break;
-            case VERTICAL_GRID:
+            case LEVEL_FOUR:
                 list = myDatabase.loadLevel4();
                 break;
         }

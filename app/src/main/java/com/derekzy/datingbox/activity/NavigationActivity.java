@@ -19,8 +19,11 @@ import android.widget.TextView;
 import com.derekzy.datingbox.R;
 import com.derekzy.datingbox.Utils.LogUtil;
 import com.derekzy.datingbox.Utils.Utils;
+import com.derekzy.datingbox.db.MyDatabase;
 
 import java.sql.BatchUpdateException;
+
+import kdx.kdy.kdz.AdManager;
 
 /**
  * Created by derekzy on 2016/2/22.
@@ -31,7 +34,9 @@ public class NavigationActivity extends AppCompatActivity {
     private TextView appName;
     private Button feelingButton;
     private Button flirtingButton;
+    private Button jokeButton;
     private Button favButton;
+    private MyDatabase myDatabase;
 
     private static final int ANIM_DURATION_TOOLBAR = 300;
 
@@ -57,16 +62,14 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            PackageManager packageManager = getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            String versionName = packageInfo.versionName;
-            int versionCode = packageInfo.versionCode;
-            String packName = packageInfo.packageName;
-            LogUtil.e("tag","versionName "+versionName+ " versionCode " +versionCode+" packageName "+packName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                myDatabase = MyDatabase.getInstance(NavigationActivity.this);
+            }
+        }).start();
+        AdManager.getInstance(this).init("d28dc57f047f7929", "59cabe5cc23f99b2", false);
 
         setContentView(R.layout.activity_navigation);
 
@@ -75,6 +78,7 @@ public class NavigationActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_inbox_white_24dp);
         feelingButton = (Button) findViewById(R.id.id_feeling_button);
         flirtingButton = (Button) findViewById(R.id.id_flirt_button);
+        jokeButton = (Button) findViewById(R.id.id_joke_button);
         favButton = (Button) findViewById(R.id.id_fav_button);
 
         toolbar.inflateMenu(R.menu.menu_toobar);
@@ -83,6 +87,8 @@ public class NavigationActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.id_aboutme:
+                        Intent intent = new Intent(NavigationActivity.this, AboutMeActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return true;
@@ -106,6 +112,13 @@ public class NavigationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 OthersActivity.actionStart(NavigationActivity.this, OthersActivity.FLIRT);
+            }
+        });
+
+        jokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OthersActivity.actionStart(NavigationActivity.this, OthersActivity.JOKE);
             }
         });
         favButton.setOnClickListener(new View.OnClickListener() {

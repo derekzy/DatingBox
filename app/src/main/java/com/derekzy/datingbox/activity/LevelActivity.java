@@ -3,12 +3,15 @@ package com.derekzy.datingbox.activity;
 import android.app.AlertDialog;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,13 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LevelActivity extends AppCompatActivity {
+    private CoordinatorLayout coordinatorLayout;
     private Toolbar toolbar;
     private TextView appName;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public FloatingActionButton floatingActionButton;
     private MyDatabase myDatabase;
+    private int pageSelectedPositon = 0;
 
+    private Boolean isTranslate = true;
 
 
     //声明tab里面的标签
@@ -91,23 +97,44 @@ public class LevelActivity extends AppCompatActivity {
                 finish();
             }
         });
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.id_question:
-                        android.support.v7.app.AlertDialog.Builder builder =
-                                new android.support.v7.app.AlertDialog.Builder(LevelActivity.this);
-                        LayoutInflater inflater = LayoutInflater.from(LevelActivity.this);
-                        View view = inflater.inflate(R.layout.question_layout, null);
-                        builder.setView(view);
-                        builder.setCancelable(true);
-                        android.support.v7.app.AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
-                }
-                return true;
+      toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.id_question:
+                    LogUtil.e("tag", "R.id.question");
+                    android.support.v7.app.AlertDialog.Builder builder =
+                            new android.support.v7.app.AlertDialog.Builder(LevelActivity.this);
+                    LayoutInflater inflater = LayoutInflater.from(LevelActivity.this);
+                    View view = inflater.inflate(R.layout.question_layout, null);
+                    builder.setView(view);
+                    builder.setCancelable(true);
+                    android.support.v7.app.AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                case R.id.id_translate:
+                    if (isTranslate) {
+                        LogUtil.e("tag", "isTranslate is " + isTranslate + "pageSelected is " + pageSelectedPositon);
+                        for (int i = 0; i < 4 ; i++) {
+
+                            FeedFrag feedFrag = (FeedFrag) fragmentList.get(i);
+                            feedFrag.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                        }
+                        isTranslate = false;
+                    } else {
+                        for (int i = 0; i < 4 ; i++) {
+                            LogUtil.e("tag", "isTranslate is " + isTranslate);
+                            FeedFrag feedFrag = (FeedFrag) fragmentList.get(i);
+                            feedFrag.recyclerView.setLayoutManager(new LinearLayoutManager(LevelActivity.this, LinearLayoutManager.VERTICAL, false));
+                        }
+                        isTranslate = true;
+
+                    }
+                    break;
             }
-        });
+            return true;
+        }
+    });
 
         AssetManager assetManager = getAssets();
         Typeface typeface = Typeface.createFromAsset(assetManager, "fonts/MargotRegular.ttf");
@@ -118,7 +145,7 @@ public class LevelActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
 
         // 设置ViewPager最大缓存的页面个数
-        viewPager.setOffscreenPageLimit(2); //////
+        viewPager.setOffscreenPageLimit(3); //////
         //添加页面监听器
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -129,15 +156,8 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(final int position) {
 
+                LevelActivity.this.pageSelectedPositon = position;
 
-                floatingActionButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FeedFrag feedFrag = (FeedFrag) fragmentList.get(position);
-                        feedFrag.recyclerView.getLayoutManager().scrollToPosition(0);
-
-                    }
-                });
             }
 
             @Override
@@ -152,5 +172,13 @@ public class LevelActivity extends AppCompatActivity {
         //设置tablayout的tab和适配器中getPageTitle返回值关联起来
         tabLayout.setTabsFromPagerAdapter(viewPagerAdapter);
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FeedFrag feedFrag = (FeedFrag) fragmentList.get(pageSelectedPositon);
+                feedFrag.recyclerView.getLayoutManager().scrollToPosition(0);
+
+            }
+        });
     }
 }

@@ -23,6 +23,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/CustomPopupMenu"
+            android:gravity="center"
             >
 
             <TextView
@@ -32,6 +33,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:text="@string/DatingBox"
+                android:layout_marginLeft="30dp"
                 android:id="@+id/id_appname"
                 android:textColor="@color/derwhite"
                 />
@@ -54,12 +56,14 @@
     </android.support.design.widget.AppBarLayout>
 
 
+
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/id_viewpager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
+
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="@dimen/btn_fab_size"

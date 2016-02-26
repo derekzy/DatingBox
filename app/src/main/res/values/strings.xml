@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DatingBox</string>
+    <string name="app_label">约会盒子</string>
     <string name="close">close</string>
     <string name="open">open</string>
     <string name="item_click">Item Click</string>
@@ -20,5 +21,8 @@
     <string name="question2">❤❤:\n和MM相处一段时间，并且对你不反感</string>
     <string name="question3">❤❤❤:\n和MM处于暧昧关系</string>
     <string name="question4">❤❤❤❤:\n和MM默认是情侣关系或者已经是情侣</string>
+    <string name="contact">联系方式：moksloop@foxmail.com\n\n觉得约会盒子对你有帮助？点击下方广告支持我一下:)</string>
+    <string name="joke">笑话</string>
+    <string name="translate">切换布局</string>
 
 </resources>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.AboutMeActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/id_toolbar"
         android:theme="@style/ThemeToolbar"
@@ -23,40 +25,49 @@
             android:textColor="@color/derwhite"
             />
     </android.support.v7.widget.Toolbar>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="400dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/id_app_logo"/>
+                android:id="@+id/id_app_logo"
+                android:src="@mipmap/ic_launcher"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/id_app_version"
-                android:gravity="center"/>
-        </LinearLayout>
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_marginTop="8dp"
-            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/id_support_me"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="@string/contact"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/id_ad_layout"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
 
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

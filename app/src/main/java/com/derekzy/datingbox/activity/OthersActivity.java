@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -39,6 +40,7 @@ import java.util.List;
 public class OthersActivity extends AppCompatActivity {
 
     public static final int FLIRT = 0;
+    public static final int JOKE = 1;
     public static final int FAV = 6;
     private int flag = 0; //flag通过传进来的数据要重新赋值
 
@@ -51,6 +53,8 @@ public class OthersActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private FloatingActionButton floatingActionButton;
+
+    private Boolean isTranslate = true;
 
     private MyDatabase myDatabase;
     private void startAnimation() {
@@ -126,12 +130,22 @@ public class OthersActivity extends AppCompatActivity {
         if (flag == FAV) {
             toolbar.inflateMenu(R.menu.fav_toolbar);
 
+        } else {
+            toolbar.inflateMenu(R.menu.others_toolbar);
         }
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+
                 switch (item.getItemId()) {
-                    case R.id.id_aboutme:
+                    case R.id.id_translate:
+                        if (isTranslate) {
+                            recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                            isTranslate = false;
+                        } else {
+                            recyclerView.setLayoutManager(new LinearLayoutManager(OthersActivity.this, LinearLayoutManager.VERTICAL, false));
+                            isTranslate = true;
+                        }
                         break;
                     case R.id.id_create:
                         Intent intent = new Intent(OthersActivity.this, EditActivity.class);
@@ -148,6 +162,12 @@ public class OthersActivity extends AppCompatActivity {
             case FLIRT:
                 cardItemList = myDatabase.loadFlirt();
                 tabName.setText(R.string.Flirt);
+                setAppNameRightMargin();
+
+                break;
+            case JOKE:
+                cardItemList = myDatabase.loadJoke();
+                tabName.setText(R.string.joke);
                 setAppNameRightMargin();
 
                 break;
@@ -182,7 +202,7 @@ public class OthersActivity extends AppCompatActivity {
 
     private void setAppNameRightMargin() {
 
-        int distance = Utils.dpToPx(48);
+        int distance = Utils.dpToPx(12);
         Toolbar.LayoutParams lp = (Toolbar.LayoutParams) appName.getLayoutParams();
         lp.rightMargin = distance;
         appName.setLayoutParams(lp);

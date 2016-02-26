@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/id_feeling_button"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/id_flirt_button"
+        android:layout_below="@id/id_flirt_button"
         android:layout_marginTop="6dp"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
@@ -50,9 +50,22 @@
         android:textColor="@color/derwhite"/>
 
     <Button
+        android:id="@+id/id_joke_button"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/id_feeling_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_navigation"
+        android:text="@string/joke"
+        android:layout_marginTop="6dp"
+        android:textSize="14sp"
+        android:textColor="@color/derwhite"/>
+
+
+    <Button
         android:id="@+id/id_fav_button"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/id_feeling_button"
+        android:layout_below="@id/id_joke_button"
         android:layout_marginTop="6dp"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
